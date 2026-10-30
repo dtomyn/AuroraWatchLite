@@ -2,6 +2,8 @@
 
 A local stock watchlist with pre-market, regular and after-hours quotes. Nothing to install: it runs on Windows PowerShell, which comes with Windows 10 and 11.
 
+Want a python version? see: https://github.com/dtomyn/AuroraWatch
+
 ## Run it
 
 1. Copy this folder anywhere on your computer.
