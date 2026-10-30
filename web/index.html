@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aurora Watch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M3 24 12 12l6 7 11-14' fill='none' stroke='%234de2d0' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <div class="tape" id="tape" aria-hidden="true"><div class="tape-track" id="tapeTrack"></div></div>
+
+  <main class="shell">
+    <header class="top">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 24 12 12l6 7 11-14"/></svg>
+        <div>
+          <h1>Aurora Watch</h1>
+          <p>Before the bell. After the close.</p>
+        </div>
+      </div>
+      <form class="adder" id="addForm" autocomplete="off" role="search">
+        <span class="adder-icon" aria-hidden="true">+</span>
+        <input id="addInput" aria-label="Add a ticker or company" placeholder="Add a ticker or company" spellcheck="false" maxlength="40">
+        <kbd>/</kbd>
+        <ul class="suggest" id="suggest" hidden></ul>
+      </form>
+    </header>
+
+    <section class="clock" aria-label="Market session">
+      <div class="clock-head">
+        <div>
+          <div class="eyebrow" id="clockTime">New York</div>
+          <div class="clock-state" id="clockState">Connecting</div>
+          <div class="clock-sub" id="clockSub"></div>
+        </div>
+        <div class="indexes" id="indexes"></div>
+      </div>
+      <div class="ribbon" id="ribbon">
+        <div class="seg pre"><span>Pre-market</span></div>
+        <div class="seg regular"><span>Regular</span></div>
+        <div class="seg post"><span>After hours</span></div>
+        <div class="now" id="nowMarker" hidden></div>
+      </div>
+      <div class="ribbon-scale"><span>4:00</span><span>9:30</span><span>16:00</span><span>20:00 ET</span></div>
+    </section>
+
+    <section class="pulse" id="pulseSection" hidden aria-label="Watchlist summary">
+      <div class="breadth">
+        <div class="eyebrow">Watchlist pulse</div>
+        <div class="breadth-num"><b class="up" id="advancers">0</b><span>/</span><b class="down" id="decliners">0</b></div>
+        <div class="breadth-bar"><i id="breadthFill"></i></div>
+      </div>
+      <div class="heat" id="heat"></div>
+    </section>
+
+    <div class="toolbar" id="toolbar" hidden>
+      <div class="seg-control" role="group" aria-label="Sort">
+        <button data-sort="mine" class="on">My order</button>
+        <button data-sort="movers">Top movers</button>
+        <button data-sort="alpha">A–Z</button>
+      </div>
+      <div class="status"><i class="dot" id="liveDot"></i><span id="statusText">Updating</span></div>
+    </div>
+
+    <section class="grid" id="grid" aria-live="off"></section>
+
+    <section class="empty" id="empty" hidden>
+      <svg viewBox="0 0 400 110" aria-hidden="true"><path d="M0 85 C50 85 60 40 110 50 S170 95 220 60 S300 10 400 25"/></svg>
+      <h2>Your watchlist is empty</h2>
+      <p>Add a ticker and see where it traded before the open and after the close.</p>
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <footer>Quotes from Yahoo Finance and may be delayed. For information only. Tickers are saved to <code>watchlist.json</code>.</footer>
+  </main>
+
+  <div class="toasts" id="toasts" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
