@@ -1,0 +1,31 @@
+{
+  "name": "Aurora Watch Lite",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/powershell:1": {}
+  },
+  "containerEnv": {
+    "AURORA_NO_BROWSER": "1",
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+  },
+  "mounts": [
+    "source=aurora-watch-claude-${devcontainerId},target=/home/vscode/.claude,type=volume"
+  ],
+  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.claude",
+  "forwardPorts": [5000],
+  "portsAttributes": {
+    "5000": {
+      "label": "Aurora Watch",
+      "onAutoForward": "openBrowser",
+      "requireLocalPort": true
+    }
+  },
+  "postAttachCommand": {
+    "server": "pwsh -NoProfile -File server.ps1"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-vscode.powershell", "anthropic.claude-code"]
+    }
+  }
+}

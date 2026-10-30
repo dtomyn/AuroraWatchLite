@@ -12,6 +12,12 @@ Want a python version? see: https://github.com/dtomyn/AuroraWatch
 
 Tickers are saved to `watchlist.json` in this folder.
 
+## Run it in a dev container
+
+With Docker running and the VS Code Dev Containers extension installed, choose **Dev Containers: Reopen in Container**. The server starts in a VS Code terminal on PowerShell 7 and the app opens in your browser. Tickers are still saved to `watchlist.json` in this folder.
+
+The container forwards port 5000 only, so it needs that port free on your computer.
+
 ## If something goes wrong
 
 - **Windows SmartScreen warning:** this can appear for files from the internet. Check where the folder came from, then choose **More info**, then **Run anyway**.

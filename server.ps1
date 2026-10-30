@@ -39,7 +39,8 @@ function Get-Tickers {
     if (-not (Test-Path -LiteralPath $ConfigPath)) { return @() }
     try {
         $data = [IO.File]::ReadAllText($ConfigPath) | ConvertFrom-Json
-        $raw = if ($data -is [array]) { $data } elseif ($data.PSObject.Properties['tickers']) { $data.tickers } else { throw 'no tickers key' }
+        # PowerShell 7 unrolls JSON lists, so [] arrives as null and ["A"] as a string.
+        $raw = if ($null -eq $data -or $data -is [array] -or $data -is [string]) { $data } elseif ($data.PSObject.Properties['tickers']) { $data.tickers } else { throw 'no tickers key' }
         $seen = @{}
         $clean = foreach ($t in @($raw)) {
             $symbol = ConvertTo-Ticker $t
