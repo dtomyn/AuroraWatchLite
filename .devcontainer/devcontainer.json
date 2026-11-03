@@ -6,6 +6,7 @@
   },
   "containerEnv": {
     "AURORA_NO_BROWSER": "1",
+    "AURORA_LISTEN_ALL": "1",
     "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
   },
   "mounts": [

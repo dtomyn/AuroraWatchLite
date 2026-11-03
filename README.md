@@ -16,7 +16,7 @@ Tickers are saved to `watchlist.json` in this folder.
 
 With Docker running and the VS Code Dev Containers extension installed, choose **Dev Containers: Reopen in Container**. The server starts in a VS Code terminal on PowerShell 7 and the app opens in your browser. Tickers are still saved to `watchlist.json` in this folder.
 
-The container forwards port 5000 only, so it needs that port free on your computer.
+The container forwards port 5000 only, so it needs that port free on your computer. If you change `devcontainer.json`, choose **Dev Containers: Rebuild Container** to apply it.
 
 ## If something goes wrong
 

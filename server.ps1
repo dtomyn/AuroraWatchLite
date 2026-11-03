@@ -313,7 +313,13 @@ function Read-JsonBody($Context) {
     return $parsed
 }
 
+# AURORA_LISTEN_ALL opens the socket wider, so requests are held to localhost here too.
+function Test-LocalRequest($Request) {
+    [Net.IPAddress]::IsLoopback($Request.RemoteEndPoint.Address) -and $Request.Url.Host -in 'localhost', '127.0.0.1'
+}
+
 function Invoke-Route($Context) {
+    if (-not (Test-LocalRequest $Context.Request)) { Send-Error $Context 403 'Local requests only'; return }
     $method = $Context.Request.HttpMethod
     $path = $Context.Request.Url.AbsolutePath
 
@@ -397,11 +403,14 @@ function Invoke-Route($Context) {
 
 # ------------------------------------------------------------------- main
 # Listens on localhost only: the app has no login and can change the local config file.
+# On Linux a localhost prefix binds only [::1], but the dev container's port forward
+# connects to 127.0.0.1, so there AURORA_LISTEN_ALL binds wider and Test-LocalRequest filters.
 $Listener = $null
 $first = if ($env:PORT) { [int]$env:PORT } else { 5000 }
+$listenHost = if ($env:AURORA_LISTEN_ALL) { '+' } else { 'localhost' }
 for ($port = $first; $port -lt ($first + 10); $port++) {
     $candidate = New-Object Net.HttpListener
-    $candidate.Prefixes.Add("http://localhost:$port/")
+    $candidate.Prefixes.Add("http://${listenHost}:$port/")
     try { $candidate.Start(); $Listener = $candidate; break }
     catch { $candidate.Close() }
 }
