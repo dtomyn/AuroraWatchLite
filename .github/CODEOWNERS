@@ -1,0 +1,7 @@
+# Default owner for everything in the repo.
+# With "Require review from Code Owners" enabled on main, changes need @dtomyn's approval.
+*                   @dtomyn
+
+# Ownership of this file and repo config is locked to the owner as well.
+/.github/           @dtomyn
+/.devcontainer/     @dtomyn
